@@ -1,6 +1,10 @@
 package com.example.pizzaorder;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +24,18 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+        Button btnOrder = findViewById(R.id.btnOrder);
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "ההזמנה בדרך!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
