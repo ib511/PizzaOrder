@@ -15,6 +15,14 @@
         android:text="כאן יופיע סיכום ההזמנה"
         android:textSize="28sp" />
 
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rgd"
+        android:orientation="vertical">
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/btnBack"
         android:layout_width="match_parent"

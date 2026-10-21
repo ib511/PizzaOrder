@@ -3,6 +3,7 @@ package com.example.pizzaorder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,12 @@ public class SummaryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        TextView tvSummary = findViewById(R.id.tvSummary);
+
+        String size = getIntent().getStringExtra("size");
+
+        tvSummary.setText("ההזמנה שלך: פיצה " + size);
 
         Button btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {

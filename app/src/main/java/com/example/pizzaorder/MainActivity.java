@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    RadioGroup rgSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +28,26 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        rgSize = findViewById(R.id.rgSize);
+
 
         Button btnOrder = findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "ההזמנה בדרך!", Toast.LENGTH_SHORT).show();
+                int checkedId = rgSize.getCheckedRadioButtonId();
+
+                String size;
+                if (checkedId == R.id.rbSmall) {
+                    size = "קטנה";
+                } else if (checkedId == R.id.rbMedium) {
+                    size = "בינונית";
+                } else {
+                    size = "משפחתית";
+                }
 
                 Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
+                intent.putExtra("size", size);
                 startActivity(intent);
             }
         });
