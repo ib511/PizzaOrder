@@ -49,6 +49,36 @@
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/tvCrust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="בחרו בצק:"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/rgCrust"
+        >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbThin"
+            android:text="דק">
+        </RadioButton>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbThick"
+            android:text="עבה">
+        </RadioButton>
+    </RadioGroup>
+
     <Button
         android:id="@+id/btnOrder"
         android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.example.pizzaorder;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     RadioGroup rgSize;
+    RadioGroup rgCrust;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         rgSize = findViewById(R.id.rgSize);
+        rgCrust = findViewById(R.id.rgCrust);
 
 
         Button btnOrder = findViewById(R.id.btnOrder);
@@ -46,9 +50,39 @@ public class MainActivity extends AppCompatActivity {
                     size = "משפחתית";
                 }
 
-                Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
-                intent.putExtra("size", size);
-                startActivity(intent);
+                checkedId = rgCrust.getCheckedRadioButtonId();
+
+                if (checkedId == -1) {
+                    Toast.makeText(MainActivity.this, "בחרו סוג בצק לפני ההזמנה", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String crust;
+                if(checkedId == R.id.rbThin){
+                    crust = "דק";
+                }else{
+                    crust = "עבה";
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("אישור הזמנה");
+                builder.setMessage("להזמין פיצה " + size + " עם בצק " + crust + "?");
+
+                builder.setPositiveButton("אשר", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "ההזמנה התקבלה!", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
+                        intent.putExtra("size", size);
+                        intent.putExtra("crust", crust);
+                        startActivity(intent);
+                    }
+                });
+
+                builder.setNegativeButton("ביטול", null);
+
+                builder.show();
             }
         });
 

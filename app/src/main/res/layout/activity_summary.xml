@@ -21,6 +21,12 @@
         android:id="@+id/rgd"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:text="חזרה" />
     </RadioGroup>
 
     <Button
