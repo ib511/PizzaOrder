@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup rgSize;
     RadioGroup rgCrust;
 
+    int price;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,38 +36,64 @@ public class MainActivity extends AppCompatActivity {
         rgSize = findViewById(R.id.rgSize);
         rgCrust = findViewById(R.id.rgCrust);
 
+        Button btnClean = findViewById(R.id.btnClean);
+        btnClean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builderr = new AlertDialog.Builder(MainActivity.this);
+                builderr.setTitle("לנקות את כל הבחירות?");
+                builderr.setPositiveButton("כן", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        rgCrust.clearCheck();
+                        rgSize.check(R.id.rbMedium);
+
+                    }
+                });
+                builderr.setNegativeButton("לא", null);
+                builderr.show();
+            }
+        });
+
 
         Button btnOrder = findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int checkedId = rgSize.getCheckedRadioButtonId();
+                price = 0;
 
                 String size;
                 if (checkedId == R.id.rbSmall) {
                     size = "קטנה";
+                    price = price + 20;
                 } else if (checkedId == R.id.rbMedium) {
                     size = "בינונית";
+                    price = price + 25;
                 } else {
                     size = "משפחתית";
+                    price = price + 30;
                 }
 
                 checkedId = rgCrust.getCheckedRadioButtonId();
 
                 if (checkedId == -1) {
                     Toast.makeText(MainActivity.this, "בחרו סוג בצק לפני ההזמנה", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
                 String crust;
                 if(checkedId == R.id.rbThin){
                     crust = "דק";
+                    price = price + 10;
                 }else{
                     crust = "עבה";
+                    price = price + 15;
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("אישור הזמנה");
+                builder.setTitle("אישור הזמנה, מחיר: " + price);
                 builder.setMessage("להזמין פיצה " + size + " עם בצק " + crust + "?");
 
                 builder.setPositiveButton("אשר", new DialogInterface.OnClickListener() {
@@ -76,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
                         intent.putExtra("size", size);
                         intent.putExtra("crust", crust);
+                        intent.putExtra("price", price);
                         startActivity(intent);
                     }
                 });

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- את הרכיבים שלכם מוסיפים כאן, בין שתי התגיות -->
+
+    <TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="כאן יופיע סיכום ההזמנה"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="כאן יופיע סיכום ההזמנה"
+        android:textSize="28sp" />
+
+
+    <RadioGroup
+        android:id="@+id/PayMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="כרטיס אשראי">
+
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/cash"
+            android:layout_width="68dp"
+            android:layout_height="55dp"
+            android:text="מזומן">
+
+        </RadioButton>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="סיום">
+
+    </Button>
+
+</LinearLayout>

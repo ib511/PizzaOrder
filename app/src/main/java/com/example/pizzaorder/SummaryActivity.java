@@ -1,5 +1,6 @@
 package com.example.pizzaorder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,18 +26,35 @@ public class SummaryActivity extends AppCompatActivity {
         });
 
         TextView tvSummary = findViewById(R.id.tvSummary);
+        TextView tvPrice = findViewById(R.id.tvPrice);
 
         String size = getIntent().getStringExtra("size");
         String crust = getIntent().getStringExtra("crust");
+        int price = getIntent().getIntExtra("price", 0);
 
         tvSummary.setText("ההזמנה שלך: פיצה " + size + ". עובי בצק: " + crust);
+        tvPrice.setText("מחיר: " + price);
+
+        Button btnPayment = findViewById(R.id.btnPayment);
+        btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SummaryActivity.this, PaymentActivity.class);
+                intent.putExtra("size", size);
+                intent.putExtra("crust", crust);
+                intent.putExtra("price", price);
+                startActivity(intent);
+
+            }
+        });
 
 
 
         Button btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View
+                    view) {
                 finish();
             }
         });
